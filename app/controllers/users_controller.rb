@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :destroy]
+  before_action :set_user, only: %i[show destroy]
 
   # GE /users
   def index
@@ -15,8 +15,9 @@ class UsersController < ApplicationController
   def create
     if @user.save
       render son: @user, status: :created
-  else
-    render json: @user.errors, status: :unprocessable_entity
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
